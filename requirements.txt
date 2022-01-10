@@ -1,0 +1,5 @@
+SQLAlchemy==1.4.7
+pandas==1.2.4
+Django==4.0.1
+psycopg2==2.9.3
+

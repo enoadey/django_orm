@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pull data to database</title>
+    <title>Sent!</title>
+   
+</head>
+<body>
+  
+  <!-- As a heading -->
+  <div class="col-md-6">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2795.0554358900044!2d3.2526638150116596!3d45.529089979101705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f6560f24fe1bd1%3A0x69b4d049ecf6eaa9!2sBraincube!5e0!3m2!1sen!2sfr!4v1641823473141!5m2!1sen!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+  <hr/>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">For Administrative Use Only!!!</span>
+  </div>
+</nav><br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 bg-primary text-center py-5 text-light">
+      <h4 class="text_center">ELECTRONIC MAIL CONTACT FORM</h4>
+</div>
+
+  {% block content %}
+  
+  <div class="container-fluid">
+  <form method="post" class="was-validated">
+    {% csrf_token %}
+    <div class="form-group">
+    <label for="fname">Sender:</label>
+    <input name='name' type="text", id="fname" class="form-control" placeholder="input name..." required>
+    </div>
+    
+    <div class="form-group">
+      <label>contact_number</label>
+      <input type="text" class="form-control" name="contact_number" placeholder="Input Contact Number...">
+    </div>
+
+    <div class="form-group">
+    <label for="exampleInputEmail1">Recipient:</label>
+    <input name='email' class="form-control" id="exampleInputEmail1" placeholder="recepient email..." aria-describedby="emailHelp" required>
+    </div>  
+    
+    <div class="form-group">
+    <label for="subject">Subject:</label>
+    <textarea name='subject' class="form-control" id="subject" name="subject" placeholder="Input Subject..." style="height:20px" required></textarea>
+    </div>
+
+    <div class="form-group">
+    <label for="subject">Message:</label>
+    <textarea name='message' class="form-control" id="message" name="message" placeholder="write something..." style="height:20px" required></textarea>
+    </div>
+
+    <input type="submit" style="background-color:green; border-color:orange; color:white" class="btn btn-success btn-lg mt-1 ml-4" value="Send Email Now!">
+    </div>
+  </form>
+</div>
+</table>
+<hr/>
+<center>
+    <h1>Real estate dashboard to fetch and view records from sqlite using django</h1>
+    <h2>sqlite_django webapp</h2>
+    
+    <hr/>
+  <h3 class="text-center"><u>Total Number Of Real Estate Sales</u></h3><br>
+    count of all goods : {{bien_immo}}
+    
+    <hr/>
+  <h3 class="text-center"><u>Real Estate Price Variation Per Ville</u></h3><br>
+
+  <table border="1" class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>Ville</th>
+        <th>Price Standard Deviation</th>
+      </tr>
+    </thead>
+  <tbody>
+
+    {% for s in std %}
+      <tr>
+        <td>{{s.ville}}</td>
+        <td>{{s.prix_m2_ttc}}</td>
+
+      </tr>
+      {% endfor %}
+      
+  </tbody>
+  </table>
+
+  <hr/>
+  <h3 class="text-center"><u>Real Estate Average Price Per Ville</u></h3><br>
+  
+  <table border= "1">
+    <thead>
+      <tr>
+        <th>Ville</th>
+        <th>Average Price</th>
+      </tr>
+    </thead>
+    
+  <tbody>
+
+    {% for m in mean %}
+      <tr>
+        <td>{{m.ville}}</td>
+        <td>{{m.prix_m2_ttc}}</td>
+
+      </tr>
+      {% endfor %}
+
+  </tbody>
+  </table>
+    <center>
+      <hr/>
+        <h3 class="text-center"><u>Real Estate Dashboard Without Balcony</u></h3><br>
+        
+        From :<input type="date" name="fromdate"/>
+        To :<input type="date" name="todate"/>
+        <input type="submit" value="Search"/>
+        <hr/>
+        <form method="POST">
+          {% csrf_token %}
+        <input type="radio" value="True" name="exterieur"/>True
+        <input type="radio" value="False" name="exterieur"/>False
+        <select name="typologie">
+          <option selected disabled=true>-- select typologie</option>
+          <option>Appartment</option>
+          <option>Maison</option>
+        </select>
+        <input type="submit" value="Search"/>
+        <hr/>
+        
+
+        <table border="1">
+          <tr>
+            <th>id</th>
+            <th>id_lot</th>
+            <th>nb_piece</th>
+            <th>typologie</th>
+            <th>prix_tva_reduite</th>
+            <th>prix_tva_normale</th>
+            <th>prix_HT</th>
+            <th>prix_m2_HT</th>
+            <th>prix_m2_TTC</th>
+            <th>orientation</th>
+            <th>exterieur</th>
+            <th>balcony</th>
+            <th>garden</th>
+            <th>parking</th>
+            <th>ville</th>
+            <th>departement</th>
+            <th>date_fin_programme</th>
+            <th>adresse_entiere</th>
+            <th>date_extraction</th>
+            <th>surface</th>
+            <th>etage</th>
+            <th>nom_programme</th>
+            <th>promoteur</th>
+        
+
+          </tr>
+          {% for i in posts%}
+          <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.id_lot}}</td>
+            <td>{{i.nb_piece}}</td>
+            <td>{{i.typologie}}</td>
+            <td>{{i.prix_tva_reduite}}</td>
+            <td>{{i.prix_tva_normale}}</td>
+            <td>{{i.prix_ht}}</td>
+            <td>{{i.prix_m2_ht}}</td>
+            <td>{{i.prix_m2_ttc}}</td>
+            <td>{{i.orientation}}</td>
+            <td>{{i.exterieur}}</td>
+            <td>{{i.balcony}}</td>
+            <td>{{i.garden}}</td>
+            <td>{{i.parking}}</td>
+            <td>{{i.ville}}</td>
+            <td>{{i.departement}}</td>
+            <td>{{i.date_fin_programme}}</td>
+            <td>{{i.adresse_entiere}}</td>
+            <td>{{i.date_extraction}}</td>
+            <td>{{i.surface}}</td>
+            <td>{{i.etage}}</td>
+            <td>{{i.nom_programme}}</td>
+            <td>{{i.promoteur}}</td>
+           
+          </tr>
+          {% endfor %}
+        </table>
+        </form>
+     </center>
+     {% endblock %}
+</body>
+</html>
